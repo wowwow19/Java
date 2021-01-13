@@ -41,5 +41,18 @@ public class Ex4 {
 //		} else {
 //			System.out.println("비겼습니다.");
 //		}	
+		
+//		switch (user - com) {
+//		case 1 : case -2 :
+//			System.out.println("당신이 이겼습니다.");
+//			break;
+//		case 0 :
+//			System.out.println("비겼습니다.");
+//			break;
+//		default :
+//			System.out.println("당신이 졌습니다.");
+//			break;
+//	}
+		
 	}
 }
