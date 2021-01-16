@@ -11,8 +11,8 @@ public class Exercise4_4 {
 //			i++;
 		}
 		
-		System.out.println(i); // 199
-		System.out.println(sum); // 100
+		System.out.println(i); 		// 199
+		System.out.println(sum); 	// 100
 		
 	}
 }
