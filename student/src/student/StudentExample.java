@@ -25,7 +25,8 @@ public class StudentExample {
 			System.out.println("-----------------------------------------");
 			System.out.println("1. 조회 2. 추가 3. 수정 4. 삭제 5. 정렬 6. 종료");
 			System.out.println("-----------------------------------------");
-			int input = Integer.parseInt(scanner.nextLine());
+			System.out.print("선택 > ");
+			int input = scanner.nextInt();
 			
 			switch (input) {
 			case 1:

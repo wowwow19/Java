@@ -7,10 +7,10 @@ public class Chap06Intro {
 	}
 }
 
-class Car {		// public 키워드 붙일 수 없음
-	
-}
-
-class Tire {
-	
-}
+//class Car {		// public 키워드 붙일 수 없음
+//	
+//}
+//
+//class Tire {
+//	
+//}
