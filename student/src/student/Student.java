@@ -44,6 +44,7 @@ public class Student {
 		this.kor = kor;
 		this.eng = eng;
 		this.math = math;
+		count++;
 	}
 	
 	// 1. 기본데이터 더미데이터로 초기화 블럭으로 옮기기
