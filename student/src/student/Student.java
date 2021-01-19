@@ -34,7 +34,9 @@ public class Student {
 				getAvg();
 	}
 	
-	Student() {}
+	Student() {
+		this(count + 1, "", 0, 0, 0);
+	}
 	
 	Student(int snum, String sname, int kor, int eng, int math) {
 		this.snum = snum;

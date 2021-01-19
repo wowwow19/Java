@@ -65,7 +65,7 @@ public class StudentService {
 			System.out.print("수정할 데이터의 학번을 입력하세요. > ");
 			int num = Integer.parseInt(scanner.nextLine());
 			
-			for (int i = 0; i < students.length; i++) {
+			for (int i = 0; i < count; i++) {
 				if (students[i].snum == num) {
 					idx = i;
 					System.out.println("-----------------------------------------------------");
