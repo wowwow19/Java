@@ -14,8 +14,7 @@ public class StudentService {
 		students[1] = new Student(2, "도우너", 88, 62, 82);
 		students[2] = new Student(3, "또치", 82, 51, 92);
 		students[3] = new Student(4, "고길동", 65, 91, 49);
-		students[4] = new Student(5, "고희동", 51, 64, 90);
-		students[5] = new Student();
+		students[4] = new Student();
 	}
 	// 기능에 대한 관리(CRUD)
 		// 학생 추가, 조회, 수정, 삭제
