@@ -36,11 +36,13 @@ public class ShapeTest {
 
 class Shape {
 	String color;
-	double perimeter;
-	double area;
-	int height;
-	double surfaceArea;
-	double volume;
+	// 2차원 도형
+	double perimeter;	// 둘레
+	double area;		// 넓이
+	// 3차원 도형
+	int height;			// 높이
+	double surfaceArea;	// 겉넓이
+	double volume;		// 부피
 		
 	Shape() {
 		color = "black";
@@ -118,7 +120,7 @@ class Cube extends Shape {
 		this.rectangle = rectangle;
 		this.height = height;
 		this.surfaceArea = rectangle.perimeter * height + 2 * rectangle.area;
-		this.volume = rectangle.area * 8;
+		this.volume = rectangle.area * height;
 	}
 
 	@Override
