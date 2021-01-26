@@ -10,9 +10,9 @@ public class StudentService {
 	
 		// 초기화 블럭에 더미데이터 입력
 	static {
-		students[0] = new Student(1, "둘리", 90, 70, 85);
-		students[1] = new Student(2, "도우너", 88, 62, 82);
-		students[2] = new Student(3, "또치", 82, 51, 92);
+		students[0] = new Student(1, "둘리", 60, 70, 85);
+		students[1] = new Student(2, "도우너", 88, 92, 82);
+		students[2] = new Student(3, "또치", 82, 81, 92);
 		students[3] = new Student(4, "고길동", 65, 91, 49);
 		students[4] = new Student();
 	}
@@ -98,5 +98,14 @@ public class StudentService {
 			return;
 		}
 		System.out.println("삭제되었습니다.");
-	}		
+	}
+	
+	void sort() {
+		Student[] tmpStudents = bubbleSort(students);
+		
+		printTopBar();
+		for(int i = 0; i < count; i++) {
+			System.out.println(tmpStudents[i]);
+		}
+	}
 }

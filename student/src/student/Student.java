@@ -94,4 +94,6 @@ public class Student {
 	// 210119
 	// 1. 삭제로직 구현
 	// 2. Student의 모든 필드에 대해 private로 변경, 필요에 따라 getter, setter 추가
+	
+	
 }
