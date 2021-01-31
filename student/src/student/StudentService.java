@@ -2,6 +2,8 @@ package student;
 
 import static student.StudentUtils.*;
 
+import java.util.Arrays;
+
 public class StudentService {
 	// 학생에 대한 관리(필드)
 		// 배열로 학생들을 관리
@@ -101,8 +103,13 @@ public class StudentService {
 	}
 	
 	void sort() {
-		Student[] tmpStudents = bubbleSort(students);
-		
+		Student[] tmpStudents = students.clone();
+//		
+//		printTopBar();
+//		for(int i = 0; i < count; i++) {
+//			System.out.println(tmpStudents[i]);
+//		}
+		Arrays.sort(tmpStudents, 0, count);
 		printTopBar();
 		for(int i = 0; i < count; i++) {
 			System.out.println(tmpStudents[i]);

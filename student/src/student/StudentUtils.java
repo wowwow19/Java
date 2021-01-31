@@ -19,7 +19,7 @@ public class StudentUtils {
 	
 	public static void insertData(int idx) {
 		System.out.print("이름 > ");
-		students[idx].setSname(nextLine());
+		students[idx].setSname(insertName());
 		System.out.print("국어점수 > ");
 		students[idx].setKor(checkScore(nextInt()));
 		System.out.print("영어점수 > ");
@@ -89,11 +89,11 @@ public class StudentUtils {
 	public static int checkScore(int score) {
 		try {
 			if (score < 0 || score > 100) {
-				Exception e = new Exception("점수의 범위를 초과했습니다. 0으로 설정합니다.");
+				MyRangeException e = new MyRangeException(0, 100);
 				throw e;
 			}
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + " 초기값(0)으로 입력되었습니다.");
 			return 0;
 		}
 		return score;
@@ -107,7 +107,7 @@ public class StudentUtils {
 		return input;
 	}
 	
-	public static Student[] bubbleSort(Student[] students) {
+	public static Student[] bubbleSort() {
 		Student[] tmpStudents = students.clone();
 		for (int i = 0; i < count-1; i++) {
 			boolean changed = false;
@@ -120,9 +120,21 @@ public class StudentUtils {
 					changed = true;
 				}
 			}
-			
 			if(!changed) break;
 		}
 		return tmpStudents;
+	}
+	
+	public static String insertName() {
+		String name = nextLine();
+		String result = "";
+		if (name.length() > 4) {
+			for (int i = 0; i < 3; i++) {
+				result += name.charAt(i);
+			}
+			return result += ">";
+		} else {
+			return name;
+		}
 	}
 }

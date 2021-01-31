@@ -1,7 +1,7 @@
 package chap09;
 
 // 비즈니스 로직 : 전화번호는 유일해야 함
-public class Addr implements Cloneable {
+public class Addr implements Cloneable, Comparable<Addr> {
 	private String name;	// 이름
 	private String phone;	// 전화번호
 	
@@ -23,6 +23,11 @@ public class Addr implements Cloneable {
 
 	public String getPhone() {
 		return phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Addr [name=" + name + ", phone=" + phone + "]";
 	}
 
 	public void setPhone(String phone) {
@@ -50,6 +55,11 @@ public class Addr implements Cloneable {
 			e.printStackTrace();
 		}
 		return addr;
+	}
+
+	@Override
+	public int compareTo(Addr o) {
+		return name.compareTo(o.name);
 	}
 	
 }

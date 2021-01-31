@@ -1,9 +1,9 @@
 package student;
 
-import static student.StudentService.*;
+import static student.StudentService.count;
 
 // API의 대상
-public class Student {
+public class Student implements Comparable<Student>{
 	// 학번, 이름, 국어, 영어, 수학
 	// 총점, 평균 : 메서드
 	private int snum;
@@ -90,6 +90,11 @@ public class Student {
 	// 1. 기본데이터 더미데이터로 초기화 블럭으로 옮기기
 	// 2. 수정 로직 작성(학번 값 입력하여 이름, 점수값 수정)
 	// 3. 생성자 오버로딩으로 제작(기본, 5개의 파라미터)
+
+	@Override
+	public int compareTo(Student o) {
+		return o.getTotal() - this.getTotal();
+	}
 	
 	// 210119
 	// 1. 삭제로직 구현
