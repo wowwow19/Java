@@ -2,46 +2,65 @@ package student;
 
 import static student.StudentUtils.*;
 
-import java.util.Arrays;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class StudentService {
 	// 학생에 대한 관리(필드)
 		// 배열로 학생들을 관리
-	static Student[] students = new Student[10];
-	static int count = 0;
+//	static Student[] students = new Student[10];
+//	static int count = 0;
+	static List<Student> students = new ArrayList<>();
 	
 		// 초기화 블럭에 더미데이터 입력
-	static {
-		students[0] = new Student(1, "둘리", 60, 70, 85);
-		students[1] = new Student(2, "도우너", 88, 92, 82);
-		students[2] = new Student(3, "또치", 82, 81, 92);
-		students[3] = new Student(4, "고길동", 65, 91, 49);
-		students[4] = new Student();
+	{
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("stu.ser")));			
+			students = (List<Student>) ois.readObject();
+			ois.close();
+		} catch(FileNotFoundException e) {
+			students.add(new Student(1, "둘리", 60, 70, 85));
+			students.add(new Student(2, "도우너", 88, 92, 82));
+			students.add(new Student(3, "또치", 82, 81, 92));
+			students.add(new Student(4, "고길동", 65, 91, 49));
+			students.add(new Student());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	// 기능에 대한 관리(CRUD)
 		// 학생 추가, 조회, 수정, 삭제
 		// 학생 추가
 	void add() {
+		System.out.print("학번 > ");
+		int num = nextInt();
+		System.out.print("이름 > ");
+		String name = nextLine();
+		System.out.print("국어점수 > ");
+		int kor = nextInt();
+		System.out.print("영어점수 > ");
+		int eng = nextInt();
+		System.out.print("수학점수 > ");
+		int math = nextInt();
 		
-		for (int i = count; i < students.length; i++) {
-			students[i] = new Student();
-			insertData(i);
-			System.out.println("입력이 완료되었습니다.");
-
-			System.out.print("더 입력하시겠습니까? 1. 예 2. 아니오 > ");
-			int choice = nextInt();
-			
-			if (choice == 2) {
-				break;
-			}
-		}
+		students.add(new Student(num, name, kor, eng, math));
+		
+		save();
 		System.out.println("메뉴를 다시 선택하세요.");
 	}
 		// 학생 조회
 	void list() {
 		printTopBar();
-		for (int i = 0; i < count; i++) {
-			System.out.println(students[i]);
+		for (int i = 0; i < students.size(); i++) {
+			System.out.println(students.get(i));
 		}
 	}
 		// 학생 수정
@@ -58,6 +77,7 @@ public class StudentService {
 				}
 			} while (idx == -1);
 			
+			
 			System.out.print("찾는 데이터가 맞습니까? 1. 예 2. 아니오 3. 종료 > ");
 			choice = nextInt();
 			
@@ -68,6 +88,7 @@ public class StudentService {
 		
 		System.out.println("데이터를 다시 입력합니다.");
 		updateData(idx);
+		save();
 		System.out.println("수정이 완료되었습니다.");
 	}
 		// 학생 삭제
@@ -96,23 +117,31 @@ public class StudentService {
 		int choice2 = nextInt();
 		if (choice2 == 1) {
 			deleteData(idx);
-		} else {
+			save();
+		} else {	
 			return;
 		}
 		System.out.println("삭제되었습니다.");
 	}
 	
 	void sort() {
-		Student[] tmpStudents = students.clone();
-//		
-//		printTopBar();
-//		for(int i = 0; i < count; i++) {
-//			System.out.println(tmpStudents[i]);
-//		}
-		Arrays.sort(tmpStudents, 0, count);
+		List<Student> tmpStudents = students.subList(0, students.size());
+		Collections.sort(tmpStudents, Student.RANK_ORDER);
+		
 		printTopBar();
-		for(int i = 0; i < count; i++) {
-			System.out.println(tmpStudents[i]);
+		for(int i = 0; i < tmpStudents.size(); i++) {
+			System.out.println(tmpStudents.get(i));
 		}
+	}
+	
+	private void save() {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("stu.ser")));			
+			oos.writeObject(students);
+			oos.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -2,8 +2,6 @@ package student;
 
 import java.util.Scanner;
 import static student.StudentService.*;
-import static student.StudentUtils.nextInt;
-import static student.StudentUtils.printMenu;
 
 public class StudentUtils {
 	
@@ -17,35 +15,22 @@ public class StudentUtils {
 		return Integer.parseInt(scanner.nextLine());
 	}
 	
-	public static void insertData(int idx) {
-		System.out.print("이름 > ");
-		students[idx].setSname(insertName());
-		System.out.print("국어점수 > ");
-		students[idx].setKor(checkScore(nextInt()));
-		System.out.print("영어점수 > ");
-		students[idx].setEng(checkScore(nextInt()));
-		System.out.print("수학점수 > ");
-		students[idx].setMath(checkScore(nextInt()));
-	}
 	
 	public static void updateData(int idx) {
-		System.out.print("이름(기존값:" + students[idx].getSname() + ") > ");
-		students[idx].setSname(nextLine());
-		System.out.print("국어점수(기존값:" + students[idx].getKor() + ") > ");
-		students[idx].setKor(checkScore(nextInt()));
-		System.out.print("영어점수(기존값:" + students[idx].getEng() + ") > ");
-		students[idx].setEng(checkScore(nextInt()));
-		System.out.print("수학점수(기존값:" + students[idx].getMath() + ") > ");
-		students[idx].setMath(checkScore(nextInt()));
+		System.out.print("학번(기존값:" + students.get(idx).getSnum() + ") > ");
+		students.get(idx).setSnum(nextInt());
+		System.out.print("이름(기존값:" + students.get(idx).getSname() + ") > ");
+		students.get(idx).setSname(nextLine());
+		System.out.print("국어점수(기존값:" + students.get(idx).getKor() + ") > ");
+		students.get(idx).setKor(checkScore(nextInt()));
+		System.out.print("영어점수(기존값:" + students.get(idx).getEng() + ") > ");
+		students.get(idx).setEng(checkScore(nextInt()));
+		System.out.print("수학점수(기존값:" + students.get(idx).getMath() + ") > ");
+		students.get(idx).setMath(checkScore(nextInt()));
 	}
 	
 	public static void deleteData(int idx) {
-		students[idx] = null;
-		for (int i = idx+1; i < count; i++) {
-			students[i-1] = students[i];
-			students[i-1].setSnum(students[i-1].getSnum()-1);
-		}
-		count--;
+		students.remove(idx);
 	}
 	
 	public static void printTopBar() {
@@ -62,24 +47,11 @@ public class StudentUtils {
 	
 	public static int findByNo(int num) {
 		int idx = 0;
-		for (int i = 0; i < count; i++) {
-			if (students[i].getSnum() == num) {
+		for (int i = 0; i < students.size(); i++) {
+			if(students.get(i).getSnum() == num) {
 				idx = i;
 				printTopBar();
-				System.out.println(students[i]);
-				return idx;
-			}
-		}
-		return -1;
-	}
-	
-	public static int findByName(String name) {
-		int idx = 0;
-		for (int i = 0; i < count; i++) {
-			if (students[i].getSname().equals(name)) {
-				idx = i;
-				printTopBar();
-				System.out.println(students[i]);
+				System.out.println(students.get(i));
 				return idx;
 			}
 		}
@@ -107,23 +79,6 @@ public class StudentUtils {
 		return input;
 	}
 	
-	public static Student[] bubbleSort() {
-		Student[] tmpStudents = students.clone();
-		for (int i = 0; i < count-1; i++) {
-			boolean changed = false;
-			
-			for (int j = 0; j < count-1-i; j++) {
-				if (tmpStudents[j].getTotal() < tmpStudents[j+1].getTotal()) {
-					Student tmp = tmpStudents[j];
-					tmpStudents[j] = tmpStudents[j+1];
-					tmpStudents[j+1] = tmp;
-					changed = true;
-				}
-			}
-			if(!changed) break;
-		}
-		return tmpStudents;
-	}
 	
 	public static String insertName() {
 		String name = nextLine();

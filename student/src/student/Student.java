@@ -1,9 +1,10 @@
 package student;
 
-import static student.StudentService.count;
+import java.io.Serializable;
+import java.util.Comparator;
 
 // API의 대상
-public class Student implements Comparable<Student>{
+public class Student implements Cloneable, Comparable<Student>, Serializable {
 	// 학번, 이름, 국어, 영어, 수학
 	// 총점, 평균 : 메서드
 	private int snum;
@@ -12,9 +13,12 @@ public class Student implements Comparable<Student>{
 	private int eng;
 	private int math;
 	
-	{
-		count++;
-	}
+	public final static Comparator<Student> RANK_ORDER = new Comparator<Student>() {
+		@Override
+		public int compare(Student o1, Student o2) {
+			return -(o1.getTotal() - o2.getTotal());
+		}
+	};
 	
 	public int getSnum() {
 		return snum;
@@ -76,7 +80,7 @@ public class Student implements Comparable<Student>{
 	}
 	
 	Student() {
-		this(count + 1, null, 0, 0, 0);
+		this(0, null, 0, 0, 0);
 	}
 	
 	Student(int snum, String sname, int kor, int eng, int math) {
@@ -95,6 +99,8 @@ public class Student implements Comparable<Student>{
 	public int compareTo(Student o) {
 		return o.getTotal() - this.getTotal();
 	}
+	
+	
 	
 	// 210119
 	// 1. 삭제로직 구현
